@@ -9,11 +9,22 @@
         Background="Beige">
     <Border Padding="10">
         <StackPanel VerticalAlignment="center" x:Name="stackPanelMain">
-            
-            <Grid x:Name="grille" Margin="120 100 120 0">
-                
+            <Label x:Name ="LabelInstruction" Content="Positionnnez vos bateau"/>
+
+            <StackPanel HorizontalAlignment="Center">
+                <Grid x:Name="grille" Margin="115 100 115 0">
             </Grid>
-            <Button x:Name="AddOrAttack" Content="Ajouter Bateau"/>
+            
+            
+            <Grid x:Name="GrilleBoat" Margin="0 0 0 0">
+            </Grid>
+            </StackPanel>
+            
+            
+            
+            <Button x:Name="NewBoat" Content="Nouveau Bateau"/>
+            <Button x:Name="ValidateBoat" Content="Valider le bateau"/>
+            <Button x:Name="VertHor" Content="VerticalAlignment Background horizontal"/>
         </StackPanel>
     </Border>
 </Window>
