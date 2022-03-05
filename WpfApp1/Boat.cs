@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace WpfApp1
 {
     internal class Boat
     {
         public Boolean alive;
         public List<BoatElement> squareBoat;
 
-        public Boat() { squareBoat = new List<BoatElement>();this.alive = true; }
+        public Boat() { squareBoat = new List<BoatElement>(); this.alive = true; }
 
-        public void AddBoatElement(int x,int y) {
+        public void AddBoatElement(int x, int y)
+        {
 
             BoatElement newBoatElement = new BoatElement(x, y);
-            this.squareBoat.Add(newBoatElement); }
+            this.squareBoat.Add(newBoatElement);
+        }
 
         public void AddFullBoat(List<Tuple<int, int>> boats)
         {
@@ -48,7 +50,8 @@ namespace ConsoleApp1
         public int y;
         public int x;
         public Boolean alive;
-        public BoatElement(int x,int y){
+        public BoatElement(int x, int y)
+        {
             this.x = x;
             this.y = y;
             this.alive = true;

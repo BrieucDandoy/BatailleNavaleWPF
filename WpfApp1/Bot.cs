@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace WpfApp1
 {
     internal class Bot
     {
@@ -27,9 +27,9 @@ namespace ConsoleApp1
                     if (item == test) { Continue = true; break; }
                 }
             }
-            this.BotPlayer.Attack(player,test.Item1,test.Item1);
+            this.BotPlayer.Attack(player, test.Item1, test.Item1);
             this.historique.Add(test);
-            Console.WriteLine("Le bot attaque "+test);
+            Console.WriteLine("Le bot attaque " + test);
 
         }
 

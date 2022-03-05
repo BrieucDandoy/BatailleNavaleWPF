@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace WpfApp1
 {
     internal class Player
     {
@@ -19,7 +19,7 @@ namespace ConsoleApp1
             this.vivant = true;
             boatList = new List<Boat>();
         }
-        public Player() { this.Nom = "playerName"; this.tailleGrille = (10, 10);boatList = new List<Boat>();}
+        public Player() { this.Nom = "playerName"; this.tailleGrille = (10, 10); boatList = new List<Boat>(); }
         public void AddBoat(Boat boat) { boatList.Add(boat); }
 
         public void RemoveBoat(Boat boat) { boatList.Remove(boat); }
@@ -52,4 +52,5 @@ namespace ConsoleApp1
 
 
     }
+
 }

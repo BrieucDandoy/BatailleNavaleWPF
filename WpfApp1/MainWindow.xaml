@@ -8,13 +8,12 @@
         Title="Bataille Navale" Height="800" Width="800"
         Background="Beige">
     <Border Padding="10">
-        <StackPanel VerticalAlignment="center">
+        <StackPanel VerticalAlignment="center" x:Name="stackPanelMain">
             
             <Grid x:Name="grille" Margin="120 100 120 0">
                 
             </Grid>
-            <Button x:Name="AddBoatButton" Content="Ajouter Bateau"/>
-            <Button Content="Play" Margin="200 400 200 0"/>
+            <Button x:Name="AddOrAttack" Content="Ajouter Bateau"/>
         </StackPanel>
     </Border>
 </Window>
