@@ -47,8 +47,8 @@ namespace WpfApp1
 
     class BoatElement
     {
-        public int y;
-        public int x;
+        public int y { get; set; }
+        public int x { get; set; }
         public Boolean alive;
         public BoatElement(int x, int y)
         {

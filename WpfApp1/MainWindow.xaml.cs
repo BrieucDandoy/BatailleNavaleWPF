@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+
 namespace WpfApp1
 {
     /// <summary>
@@ -21,26 +23,36 @@ namespace WpfApp1
     {
         public MainWindow()
         {
-            Instruction instruction;
-            instruction.SetNomInstruction("PlaceBoat"); //"PlaceBoat" "AttackBoat"
             InitializeComponent();
+            
+
+
+        Instruction instruction = new("PlaceBoat", LabelInstruction); //"PlaceBoat" "AttackBoat"
             int numRows = 9;
             int numColumns = 9;
             Player Joueur1 = new("Joueur1", (numRows, numColumns));
-            Bot bot1 = new((numRows, numColumns));
-            List<Boat> ListeBateau = new();
-            List<Tuple<int,int>> ListeBoatElement = new();
-
+            int nombreBateauBot = 3;
+            Bot bot1 = new((numRows, numColumns), nombreBateauBot);
+            string VerticalHorizontal = "Horizontal";
+            int etape = 0;
             
-            NewBoat.Click += (sender, e) =>
+            NewBoat.Click += (sender, e) => //bouton pour ajouter des bateau
             {
-
-
-                
+                etape = 1;
             };
+
             
-            
-                
+
+            VertHor.Click += (sender, e) => { 
+                if (VerticalHorizontal == "Horizontal") {
+                    VerticalHorizontal = "Vertical";
+                    instruction.SetNomInstruction("Veuillez positionner vos bateaux : Vous avez choisi le positionnement Vertical");
+                }
+                else{
+                    VerticalHorizontal = "Horizontal";
+                    instruction.SetNomInstruction("Veuillez positionner vos bateaux : Vous avez choisi le positionnement Horizontal");
+                }
+            };// Change le positionnement en cas de clique sur le bouton
 
 
             for (int row = 0; row < numRows; row++)
@@ -50,43 +62,64 @@ namespace WpfApp1
                 grille.RowDefinitions.Add(new RowDefinition()); //je lui rajoute 9 lignes et 9 colonnes
                 GrilleBoat.RowDefinitions.Add(new RowDefinition());
             }
+            List<Button> listeBouton = new();
             for (int col = 0; col < numColumns; col++) //je met les boutons
             {
                 for (int row = 0; row < numRows; row++)
                 {
-                   
-                    Button button = new Button();
+                    Button button = new();
                     button.Margin = new Thickness(0, 0, 0, 0);
-                    
+                    button.Name ="bouton" +  col.ToString() + row.ToString();
+                   
+
+
                     button.Click += (sender, e) => { //Quand on clique sur le bouton (évènement)
-                    Joueur1.Attack(bot1.BotPlayer, row, col);//envoie un missile sur la case
-                    button.IsEnabled = false; //désactive le bouton
+                        var button = (Button)sender;
+                        Boolean touche = Joueur1.Attack(bot1.BotPlayer, button.Name[0],button.Name[1]); //envoie un missile sur la case
+                        Trace.WriteLine($"{button.Name[button.Name.Length-1]} et {button.Name[button.Name.Length-2]}");
+                        
+                        if (touche) button.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                        else button.Background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                     };
-                    
-                    button.IsEnabledChanged += (sender, e) => { button.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0)); };
+
+
 
 
 
                     button.Background = new SolidColorBrush(Color.FromRgb(153,204,255)); //couleur du bouton
-                    button.Content = string.Format(" ");
+                    button.Content = string.Format(" "+row.ToString() + col.ToString());
                     Grid.SetRow(button, row);
                     Grid.SetColumn(button, col);
                     grille.Children.Add(button);//ajoute le bouton dans la grille
 
                     Button buttonGrilleBoat = new();
                     buttonGrilleBoat.Margin = new Thickness(0, 0, 0,0);
-                    buttonGrilleBoat.Click += (sender, e) => { };//défini ce qu'on fait en cas de click
+                    buttonGrilleBoat.Click += (sender, e) => { if (etape == 1) {
+
+                        if (VerticalHorizontal == "Vertical") {
+                            Boat tmpbateau = new();
+                            tmpbateau.AddBoatElement(row - 1, col);
+                            tmpbateau.AddBoatElement(row, col);
+                            tmpbateau.AddBoatElement(row + 1, col);
+                            Joueur1.AddBoat(tmpbateau);
+                        }
+                        else if (VerticalHorizontal == "Horizontal")
+                            {
+                                Boat tmpbateau = new();
+                                tmpbateau.AddBoatElement(row, col-1);
+                                tmpbateau.AddBoatElement(row, col);
+                                tmpbateau.AddBoatElement(row, col+1);
+                                Joueur1.AddBoat(tmpbateau);
+
+                            }
+                        } };//défini ce qu'on fait en cas de click
                     Grid.SetRow(buttonGrilleBoat, row);
                     Grid.SetColumn(buttonGrilleBoat, col);
                     GrilleBoat.Children.Add(buttonGrilleBoat);
-
+                    
                 }
-
-
             }
-
-
-        }
+        }       
     }
 
 }

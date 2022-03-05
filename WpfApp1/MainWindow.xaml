@@ -5,26 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Bataille Navale" Height="800" Width="800"
+        Title="Bataille Navale" Height="720" Width="1050"
         Background="Beige">
-    <Border Padding="10">
-        <StackPanel VerticalAlignment="center" x:Name="stackPanelMain">
-            <Label x:Name ="LabelInstruction" Content="Positionnnez vos bateau"/>
 
-            <StackPanel HorizontalAlignment="Center">
-                <Grid x:Name="grille" Margin="115 100 115 0">
-            </Grid>
-            
-            
-            <Grid x:Name="GrilleBoat" Margin="0 0 0 0">
-            </Grid>
-            </StackPanel>
-            
-            
-            
-            <Button x:Name="NewBoat" Content="Nouveau Bateau"/>
-            <Button x:Name="ValidateBoat" Content="Valider le bateau"/>
-            <Button x:Name="VertHor" Content="VerticalAlignment Background horizontal"/>
+    <!-- Ajout des bordures le tour de la grille qui accueille l'affichage -->
+    <Border BorderThickness="10">
+        <StackPanel>
+
+            <!-- Déclaration du label pour afficher les instructions du joueur-->
+            <Label HorizontalAlignment="Center" x:Name ="LabelInstruction" Content="Positionnnez vos bateau"/>
+                <!-- Déclaration de la grille qui accueille les grilles de jeu-->
+                <Grid>
+
+                    <!-- Définition des colonnes de la grille qui accueille les grilles de jeu-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Définition des lignes de la grille qui accueille les grilles de jeu-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="400"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Déclaration de la première grille de jeu-->
+                    <Grid  Grid.Column="0" Grid.Row="1" x:Name="grille" Margin="0 0 0 0">
+                    </Grid>
+
+                    <!-- Déclaration de la deuxième grille de jeu-->
+                    <Grid  Grid.Column="2" Grid.Row="1" x:Name="GrilleBoat" Margin="0 0 0 0">
+                    </Grid>
+
+                <!-- Déclaration du bouton pour ajouter un bateau-->
+                <Button Grid.Column="0" Grid.Row="2" x:Name="NewBoat" Content="Nouveau Bateau"/>
+
+                <!-- Déclaration du bouton pour ajouter un bateau-->
+                <Button Grid.Column="1" Grid.Row="2" x:Name="ValidateBoat" Content="Valider le bateau"/>
+
+                <!-- Déclaration du bouton pour changer l'orientation du bateau à ajouter-->
+                <Button Grid.Column="2" Grid.Row="2" x:Name="VertHor" Content="Changer l'orientation du bateau à ajouter"/>
+                </Grid>
         </StackPanel>
     </Border>
 </Window>
